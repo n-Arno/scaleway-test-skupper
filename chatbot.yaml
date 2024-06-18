@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: chatbot
+  name: chatbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatbot
+  template:
+    metadata:
+      labels:
+        app: chatbot
+    spec:
+      containers:
+      - image: ghcr.io/n-arno/chatbot:latest
+        name: chatbot
+        env:
+        - name: "MODEL"
+          value: "tinyllama"
+        ports:
+        - containerPort: 8080
+          name: app
+          protocol: TCP
